@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <title>Music Player PWA</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="icon.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="circle-1"></div>
+      <div class="circle-2"></div>
+      <div class="circle-3"></div>
+      <div class="music-player">
+        <!-- Circular elements -->
+        <div class="music-image">
+          <!-- Use an image placeholder or a video element with the music image -->
+          <img src="image/music.webp" alt="Music Image" class="music-image" />
+        </div>
+        <!-- Circular elements -->
+        <audio id="audio" controls>
+          <source id="audio-source" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+        <div class="music-controls">
+          <button id="prev-button"><i class="fas fa-backward"></i></button>
+          <button id="play-pause-button" class="play">
+            <i class="fas fa-play"></i>
+          </button>
+          <button id="next-button"><i class="fas fa-forward"></i></button>
+        </div>
+        <div class="subtitle" id="subtitle"></div>
+      </div>
+    </main>
+    <script src="app.js"></script>
+    <script>
+      // Function to load and display subtitles from an SRT file
+      function loadSubtitles() {
+        const subtitleElement = document.getElementById("subtitle");
+
+        // Fetch the SRT file
+        fetch("sub/music.srt")
+          .then((response) => response.text())
+          .then((srtData) => {
+            const subtitles = parseSRT(srtData); // Parse SRT data
+
+            // Display subtitles
+            let currentIndex = 0;
+
+            function displaySubtitle(index) {
+              if (index < subtitles.length) {
+                const subtitle = subtitles[index];
+                subtitleElement.textContent = subtitle.text;
+
+                // Set a timeout to hide the subtitle after its end time
+                setTimeout(() => {
+                  subtitleElement.textContent = "";
+                  displaySubtitle(index + 1); // Display the next subtitle
+                }, subtitle.duration);
+              } else {
+                subtitleElement.textContent = ""; // Clear subtitle when no more subtitles
+              }
+            }
+
+            displaySubtitle(currentIndex);
+          })
+          .catch((error) => {
+            console.error("Failed to load subtitles:", error);
+          });
+      }
+
+      // Call the loadSubtitles function to load and display subtitles
+      loadSubtitles();
+
+      // Function to parse SRT data into an array of subtitle objects
+      function parseSRT(srtData) {
+        const subtitleEntries = srtData.trim().split(/\n\s*\n/);
+        return subtitleEntries.map((entry) => {
+          const [timecode, ...lines] = entry.split("\n");
+          const [startTime, endTime] = timecode
+            .split(" --> ")
+            .map(parseSRTTime);
+          const text = lines.join("\n");
+          return {
+            startTime,
+            endTime,
+            duration: endTime - startTime,
+            text,
+          };
+        });
+      }
+
+      // Function to parse SRT time format (hh:mm:ss,ms) into milliseconds
+      function parseSRTTime(time) {
+        const parts = time.split(/[:,]/).map(parseFloat);
+        return (
+          parts[0] * 3600000 + parts[1] * 60000 + parts[2] * 1000 + parts[3]
+        );
+      }
+    </script>
+  </body>
+</html>

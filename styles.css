@@ -1,0 +1,138 @@
+/* Mobile-first styles (applied to all screen sizes) */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #141414;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  text-align: center;
+}
+
+/* Add this to your existing styles.css file or create a new CSS file and link it */
+
+/* Center the music player and set its dimensions */
+.music-player {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 60%;
+  background: #7f76760f;/* Add a background color with 90% opacity (blur effect) */
+  box-shadow: 0 0 20px #7f76760f; /* Add a shadow effect */
+  backdrop-filter: blur(10px); /* Apply a blur effect to the background */
+  border-radius: 10px; /* Add rounded corners for a card-like appearance */
+  padding: 20px; /* Add padding to the content inside the music player */
+}
+
+/* Style the playback controls (buttons) */
+.music-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+/* Style the audio element */
+#audio {
+  width: 100%;
+  height: 20%;
+}
+
+/* Style the Font Awesome icons */
+.fa-play,
+.fa-pause,
+.fa-backward,
+.fa-forward {
+  font-size: 24px; /* Adjust the icon size as needed */
+  color: #fff; /* Set the icon color to white */
+}
+
+/* Modify the icon color on hover */
+.fa-play:hover,
+.fa-pause:hover,
+.fa-backward:hover,
+.fa-forward:hover {
+  color: #ff6600; /* Change the color on hover to a different color (e.g., orange) */
+}
+
+/* Circular elements */
+.circle-1,
+.circle-2,
+.circle-3 {
+  position: absolute;
+  background-color: rgb(255 102 0); /* Set a background color with opacity */
+  border-radius: 50%; /* Make it circular */
+}
+
+.circle-1 {
+  width: 100px;
+  height: 100px;
+  top: 280px; /* Adjust the position as needed */
+  left: -14px; /* Adjust the position as needed */
+}
+
+.circle-2 {
+  width: 80px;
+  height: 80px;
+  top: 550px; /* Adjust the position as needed */
+  left: 30px; /* Adjust the position as needed */
+}
+
+.circle-3 {
+  width: 100px;
+  height: 100px;
+  top: 200px; /* Adjust the position as needed */
+  left: 320px; /* Adjust the position as needed */
+}
+
+.music-image {
+    border-radius: 15px;
+}
+
+/* Responsive styles for smaller screens (e.g., mobile devices) */
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  /* Adjust other styles as needed for smaller screens */
+}
+
+.music-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px; /* Adjust the size as needed */
+  transition: color 0.2s ease; /* Add a smooth color transition */
+}
+
+.music-controls button i {
+  color: #f0f0f0; /* Default icon color */
+}
+
+.playing i::before {
+  content: "\f28b"; /* FontAwesome pause icon */
+}
+
+/* Add animation for play/pause button */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.playing {
+  animation: pulse 0.5s infinite alternate; /* Play/pause button animation */
+}
