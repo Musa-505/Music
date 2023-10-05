@@ -15,17 +15,16 @@ body {
 
 /* Center the music player and set its dimensions */
 .music-player {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 60%;
-  background: #7f76760f;/* Add a background color with 90% opacity (blur effect) */
-  box-shadow: 0 0 20px #7f76760f; /* Add a shadow effect */
-  backdrop-filter: blur(10px); /* Apply a blur effect to the background */
-  border-radius: 10px; /* Add rounded corners for a card-like appearance */
-  padding: 20px; /* Add padding to the content inside the music player */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 60%;
+    background: #7f76760f;
+    box-shadow: 0 0 20px #7f76760f;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
 }
 
 /* Style the playback controls (buttons) */
@@ -72,22 +71,28 @@ body {
 .circle-1 {
   width: 100px;
   height: 100px;
-  top: 280px; /* Adjust the position as needed */
-  left: -14px; /* Adjust the position as needed */
+  top: 25%; /* Adjust the position as needed */
+  left: 20%; /* Adjust the position as needed */
 }
 
 .circle-2 {
   width: 80px;
   height: 80px;
-  top: 550px; /* Adjust the position as needed */
-  left: 30px; /* Adjust the position as needed */
+  top: 60%; /* Adjust the position as needed */
+  left: 15%; /* Adjust the position as needed */
 }
 
 .circle-3 {
   width: 100px;
   height: 100px;
-  top: 200px; /* Adjust the position as needed */
-  left: 320px; /* Adjust the position as needed */
+  top: 50%; /* Adjust the position as needed */
+  left: 70%; /* Adjust the position as needed */
+}
+
+.ranges {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .music-image {

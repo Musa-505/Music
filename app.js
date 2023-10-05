@@ -17,6 +17,37 @@ const prevButton = document.getElementById('prev-button');
 const playButton = document.getElementById('play-button');
 const nextButton = document.getElementById('next-button');
 const playPauseButton = document.getElementById('play-pause-button');
+const volumeSlider = document.getElementById("volume-slider");
+
+volumeSlider.addEventListener("input", () => {
+    audio.volume = volumeSlider.value;
+});
+
+const musicTimeline = document.getElementById("music-timeline");
+
+// Add an event listener to the audio element to update the timeline
+audio.addEventListener("timeupdate", () => {
+    const currentTime = audio.currentTime;
+    const duration = audio.duration;
+  
+    // Calculate the progress as a percentage
+    const progress = (currentTime / duration) * 100;
+  
+    // Update the value of the range input
+    musicTimeline.value = progress;
+  });
+  
+  // Add an event listener to the range input to seek to a specific position
+  musicTimeline.addEventListener("input", () => {
+    const progress = musicTimeline.value;
+    const duration = audio.duration;
+  
+    // Calculate the time to seek to
+    const seekTime = (progress / 100) * duration;
+  
+    // Update the audio's current time
+    audio.currentTime = seekTime;
+  });
 
 playPauseButton.addEventListener('click', () => {
     if (audio.paused) {

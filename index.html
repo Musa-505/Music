@@ -27,11 +27,21 @@
           <!-- Use an image placeholder or a video element with the music image -->
           <img src="image/music.webp" alt="Music Image" class="music-image" />
         </div>
+        <div class="music-info">
+          <span id="artist-name">Raim</span>
+          <span id="track-name">4 Dongelek (Albume)</span>
+        </div>      
         <!-- Circular elements -->
-        <audio id="audio" controls>
+        <audio id="audio">
           <source id="audio-source" type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
+        <div class="ranges">
+          <input type="range" id="music-timeline" min="0" max="100" value="0">
+          <div class="volume-controls">
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+          </div>
+        </div>
         <div class="music-controls">
           <button id="prev-button"><i class="fas fa-backward"></i></button>
           <button id="play-pause-button" class="play">
